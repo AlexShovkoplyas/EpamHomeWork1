@@ -68,7 +68,7 @@ namespace EpamHomeWork1
                 {
                     message = $"Problems with input parameters in task {choice}. Try to test task from beggining.";
                     Console.WriteLine(message);
-                    logger.Error(message, e);
+                    logger?.Error(message, e);
                 }
                 
                 Console.WriteLine("\nSome other task?");
@@ -79,7 +79,7 @@ namespace EpamHomeWork1
 
         private static void PrintLogs()
         {
-            logger.ReadLogFile();
+            logger?.ReadLogFile();
         }
 
         static public void PrintOptions()
@@ -126,7 +126,7 @@ namespace EpamHomeWork1
             {
                 message = "Unable to Sum or Substract 2 vector 1 and vector 2";
                 Console.WriteLine(message);
-                logger.Error(message, e);
+                logger?.Error(message, e);
             }
 
             try
@@ -141,7 +141,7 @@ namespace EpamHomeWork1
             {
                 message = "Unable to calculate scalar product of vector 1 and vector 2";
                 Console.WriteLine(message);
-                logger.Error(message, e);
+                logger?.Error(message, e);
             }
 
             try
@@ -153,7 +153,7 @@ namespace EpamHomeWork1
             {
                 message = "Unable to calculate vector product of vector 1 and vector 2";
                 Console.WriteLine(message);
-                logger.Error(message, e);
+                logger?.Error(message, e);
             }
 
             try
@@ -165,7 +165,7 @@ namespace EpamHomeWork1
             {
                 message = "Unable to calculate tripple product";
                 Console.WriteLine(message);
-                logger.Error(message, e);
+                logger?.Error(message, e);
             }
 
             try
@@ -178,7 +178,7 @@ namespace EpamHomeWork1
             {
                 message = "Unable to calculate vector length";
                 Console.WriteLine(message);
-                logger.Error(message, e);
+                logger?.Error(message, e);
             }
         }
 
@@ -207,7 +207,7 @@ namespace EpamHomeWork1
             {
                 message = "Unable to Intercept rectangles";
                 Console.WriteLine(message);
-                logger.Error(message, e);
+                logger?.Error(message, e);
             }
 
             try
@@ -219,7 +219,7 @@ namespace EpamHomeWork1
             {
                 message = "Unable to Union rectangles";
                 Console.WriteLine(message);
-                logger.Error(message, e);
+                logger?.Error(message, e);
             }
         }
 
@@ -251,7 +251,7 @@ namespace EpamHomeWork1
             {
                 message = "Unable to get vector element";
                 Console.WriteLine(message);
-                logger.Error(message, e);
+                logger?.Error(message, e);
             }
 
             try
@@ -266,7 +266,7 @@ namespace EpamHomeWork1
             {
                 message = "Unable to add or substract vectors";
                 Console.WriteLine(message);
-                logger.Error(message, e);
+                logger?.Error(message, e);
             }
             
             Console.WriteLine("\nVector 1  * Scalar :");
