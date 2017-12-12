@@ -6,121 +6,33 @@ using System.Threading.Tasks;
 
 namespace EpamHomeWork1
 {
-    class Vector
+    class Vector3D : VectorGeneral
     {
-        public static int dimension;
-
-        static Vector()
+        public Vector3D(params double[] coordinates) : base(coordinates, 0)
         {
-            dimension = 3;
-        }
-
-        public Vector(params double[] coordinates)
-        {
-            for (int i = 0; i < coordinates.Length; i++)
+            if (coordinates.Length!=3)
             {
-                Coordinates[i] = coordinates[i];
+                throw new Exception("Vector3D operates only with vectors of 3 dimensions");
             }
         }
 
-        public double[] Coordinates { get; set; } = new double[dimension];
-
-        public double this[int i]
+        static public Vector3D VectorProduct(Vector3D a, Vector3D b)
         {
-            get { return Coordinates[i]; }
-
-            //контроль виходу за допустимі межі
-            set { }
+            return new Vector3D(
+                a[1] * b[2] - a[2] * b[1],
+                a[2] * b[0] - a[0] * b[2],
+                a[0] * b[1] - a[1] * b[0]);
         }
 
-        static public Vector Add(Vector v1, Vector v2)
-        {
-            double[] newCoordinates = new double[dimension];
-            for (int i = 0; i < dimension; i++)
-            {
-                newCoordinates[i] = v1[i] + v2[i];
-            }
-
-            return new Vector(newCoordinates);
-        }
-
-        static public Vector Substract(Vector v1, Vector v2)
-        {
-            double[] newCoordinates = new double[dimension];
-            for (int i = 0; i < dimension; i++)
-            {
-                newCoordinates[i] = v1[i] - v2[i];
-            }
-
-            return new Vector(newCoordinates);
-        }
-
-        static public double ScalarProduct(Vector v1, Vector v2)
-        {
-            double sum = 0;
-            for (int i = 0; i < dimension; i++)
-            {
-                sum += v1[i] * v2[i];
-            }
-            return sum;
-        }
-
-        static public Vector VectorProduct(Vector a, Vector b)
-        {
-            if (dimension == 3)
-            {
-                return new Vector(
-                    a[2] * b[3] - a[3] * b[2],
-                    a[3] * b[1] - a[1] * b[3],
-                    a[1] * b[2] - a[2] * b[1]); //  a2b3 - a3b2, a3b1 - a1b3, a1b2 - a2b1)
-            }
-            else
-            {
-                Console.WriteLine($"I don't know how to calculate vector product for {dimension} dimentions");
-                return null;
-            }
-        }
-
-        static public double TrippleProduct(Vector a, Vector b, Vector c)
+        static public double TrippleProduct(Vector3D a, Vector3D b, Vector3D c)
         {
             return ScalarProduct(a, VectorProduct(b, c));
         }
 
-        public double Length()
+        static public double Angle(Vector3D a, Vector3D b)
         {
-            double sum = 0;
-            for (int i = 0; i < dimension; i++)
-            {
-                sum += Math.Pow(Coordinates[i], 2);
-            }
-            return Math.Sqrt(sum);
-        }
-
-        public Vector ScalarProd(double s)
-        {
-
-            return 
-        }
-
-        static double Angle(Vector a, Vector b)
-        {
-            double cosinus = ScalarProduct(a, b) / (a.Length() * b.Length());
-            return Math.Acos(cosinus);
-        }
-
-        static double Compare(Vector a, Vector b)
-        {
-            return a.Length() - b.Length();
-        }
-
-        public static Vector operator +(Vector a, Vector b)
-        {
-            return Add(a, b);
-        }
-
-        public static Vector operator -(Vector a, Vector b)
-        {
-            return Substract(a, b);
+            double cosinus = ScalarProduct(a, b) / (a.VectorLength() * b.VectorLength());
+            return  180* Math.Acos(cosinus) / Math.PI;
         }
     }
 }

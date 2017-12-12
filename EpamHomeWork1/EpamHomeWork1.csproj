@@ -8,8 +8,9 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>EpamHomeWork1</RootNamespace>
     <AssemblyName>EpamHomeWork1</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,9 +47,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rectangle.cs" />
     <Compile Include="Vector.cs" />
+    <Compile Include="VectorGeneral.cs" />
+    <Compile Include="Verificaton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DumbLogger\DumbLogger2\DumbLogger2.csproj">
+      <Project>{6a38c914-f0a5-44ed-85d3-a1e9c91a4a7e}</Project>
+      <Name>DumbLogger2</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

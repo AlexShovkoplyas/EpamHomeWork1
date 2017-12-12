@@ -6,39 +6,37 @@ using System.Threading.Tasks;
 
 namespace EpamHomeWork1
 {
-    //class Coordinate
-    //{
-    //    public int X { get; set; }
-    //    public int Y { get; set; }
-
-    //    public Coordinate(int horizontal, int vertical)
-    //    {
-    //        X = horizontal;
-    //        Y = vertical;
-    //    }
-    //}
-
     class Rectangle
     {
-        public double Left { get; set; }
-        public double Top { get; set; }
-        public double Right { get; set; }
-        public double Bottom { get; set; }
+        public double Left { get;private set; }
+        public double Top { get; private set; }
+        public double Right { get; private set; }
+        public double Bottom { get; private set; }
 
-        public Rectangle()
+        private Rectangle() { }
+
+        public Rectangle(double left, double top, double right, double bottom)
         {
+            if (left >= right || top <= bottom)
+            {
+                throw new Exception("Wrong parameters in Rectangle constructor");
+            }
 
-        }
-
-        public Rectangle(double left, double top,double right,double bottom)
-        {
             Left = left;
             Top = top;
             Right = right;
             Bottom = bottom;
         }
 
-        public void Move(double horizontalOffset, double verticalOffset)
+        public Rectangle(double[] parameters):this(parameters[0],parameters[1],parameters[2],parameters[3])
+        {
+            if (parameters.Length!=4)
+            {
+                throw new Exception("Wrong parameters in Rectangle constructor");
+            }
+        }
+
+        public void Move(double horizontalOffset = 0, double verticalOffset = 0)
         {
             Left += horizontalOffset;
             Right += horizontalOffset;
@@ -47,20 +45,20 @@ namespace EpamHomeWork1
             Bottom += verticalOffset;
         }
 
-        public static Rectangle Intercept(Rectangle a,Rectangle b)
+        public static Rectangle Intercept(Rectangle a, Rectangle b)
         {
             Rectangle c = new Rectangle();
 
-            if (a.Right< b.Left || a.Left>b.Right|| a.Top<b.Bottom || a.Bottom >b.Top)
+            if (a.Right < b.Left || a.Left > b.Right || a.Top < b.Bottom || a.Bottom > b.Top)
             {
-                return null;
+                throw new Exception("Interception of 2 rectangles is not possible");
             }
             else
             {
-                c.Left = Math.Max(a.Right, b.Left);
-                c.Right = Math.Min(a.Left, b.Right);
-                c.Top = Math.Min(a.Top, b.Bottom);
-                c.Bottom = Math.Max(a.Bottom, b.Top);
+                c.Left = Math.Max(a.Left, b.Left);
+                c.Right = Math.Min(a.Right, b.Right);
+                c.Top = Math.Min(a.Top, b.Top);
+                c.Bottom = Math.Max(a.Bottom, b.Bottom);
             }
 
             return c;
@@ -70,19 +68,19 @@ namespace EpamHomeWork1
         {
             Rectangle c = new Rectangle();
 
-            if (false)
-            {
-                return null;
-            }
-            else
-            {
-                c.Left = Math.Max(a.Right, b.Left);
-                c.Right = Math.Min(a.Left, b.Right);
-                c.Top = Math.Min(a.Top, b.Bottom);
-                c.Bottom = Math.Max(a.Bottom, b.Top);
-            }
+            c.Left = Math.Min(a.Left, b.Left);
+            c.Right = Math.Max(a.Right, b.Right);
+            c.Top = Math.Max(a.Top, b.Top);
+            c.Bottom = Math.Min(a.Bottom, b.Bottom);
 
             return c;
+        }
+
+        public void Output()
+        {
+            Console.WriteLine($"     Top :{Top:F0}");
+            Console.WriteLine($"Left :{Left,-5:F0} Right :{Right,-5:F0}");
+            Console.WriteLine($"     Bottom :{Bottom:F0}");
         }
     }
 }
